@@ -1,0 +1,57 @@
+cook_book = [
+    ['салат',
+        [
+            ['картофель', 100, 'гр.'],
+            ['морковь', 50, 'гр.'],
+            ['огурцы', 50, 'гр.'],
+            ['горошек', 30, 'гр.'],
+            ['майонез', 70, 'мл.'],
+        ]
+    ],
+    ['пицца',  
+        [
+            ['сыр', 50, 'гр.'],
+            ['томаты', 50, 'гр.'],
+            ['тесто', 100, 'гр.'],
+            ['бекон', 30, 'гр.'],
+            ['колбаса', 30, 'гр.'],
+            ['грибы', 20, 'гр.'],
+        ],
+    ],
+    ['фруктовый десерт',
+        [
+            ['хурма', 60, 'гр.'],
+            ['киви', 60, 'гр.'],
+            ['творог', 60, 'гр.'],
+            ['сахар', 10, 'гр.'],
+            ['мед', 50, 'мл.'],  
+        ]
+    ]
+]
+
+person = int(input('person'))
+
+# Создаем словарь для суммирования ингредиентов
+shopping_list = {}
+
+for dish in cook_book:
+    dish_name = dish[0]
+    ingredients = dish[1]
+    for item in ingredients:
+        ingredient_name = item[0]
+        quantity = item[1] * person  # умножение количества на число персон
+        unit = item[2]
+        if ingredient_name in shopping_list:
+            shopping_list[ingredient_name][0] += quantity
+        else:
+            shopping_list[ingredient_name] = [quantity, unit]
+
+# Вывод результата
+for dish in cook_book:
+    print(f"{dish[0].capitalize()}:")
+    for item in dish[1]:
+        name = item[0]
+        unit = item[2]
+        total_quantity = shopping_list[name][0]
+        print(f"{name}, {total_quantity}{unit}")
+    print()
